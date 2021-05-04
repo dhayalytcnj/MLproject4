@@ -4,7 +4,10 @@ CSC 426-01
 Project 4 - Perceptrons
 '''
 
+import numpy
+import pandas
 
+#wi <- wi + \Delta wi
 '''
 Perceptron Training Rule 
 1. start with random weight values

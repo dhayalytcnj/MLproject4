@@ -45,7 +45,7 @@ class Perceptron:
             result = -1
         return result
 
-    def Perceptron_Training(self, x: nump.array, y:numpy.array, iterations = 200):
+    def Perceptron_Training(self, x: numpy.array, y:numpy.array, iterations = 200):
         # o is training samples for the model
         # t is labeling the training samples
         self.delta_w = 0.0
@@ -62,19 +62,18 @@ class Perceptron:
                 if change != 0.0:
                     error_count += 1
                     interation_count += 1
-                else
+                else:
                     break
             self.misclassified.append(error_count)
             self.iteration_stop.append(iteration_count)
-            if error_count == 0:
+            #if error_count == 0:
+                
 
 
 
 if __name__ == "__main__":
     data = pandas.read_csv('iris.data', header = None)
     
-    print
-
-     for example in data:
-        dataset.append(example)
-    
+    #for example in data:
+    #   dataset.append(example)
+    print("testing")

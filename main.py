@@ -49,8 +49,8 @@ class Perceptron:
         return result
 
     def Perceptron_Training(self, x: numpy.array, y:numpy.array, iterations = 200):
-        # o is training samples for the model
-        # t is labeling the training samples
+        # x is training samples for the model
+        # y is labeling the training samples
         self.delta_w = 0.0
         self.weights = numpy.zeros(x.shape[1])
         self.misclassified = []

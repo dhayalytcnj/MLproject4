@@ -4,7 +4,7 @@ CSC 426-01
 Project 4 - Perceptrons
 '''
 
-import numpy
+import numpy 
 import pandas
 
 #wi <- wi + \Delta wi
@@ -19,19 +19,15 @@ Perceptron Training Rule
 3. repeat step 2 as many times as needed until the perceptron classifies all training examples correctly 
 '''
 
-
-
-import numpy
-import pandas
-
 class Perceptron:
     def __init__(self, eta = 0.1):
-        self.weights = None
+        self.weights = [0,0,0,0]
         self.delta_w = 0.0
-        self.iterations = iterations
+        self.iterations = 200
         self.iteration_stop = []
         self.eta = eta
         self.misclassified = []
+    
     
 
     def output(self, x: numpy.array):   # output function that reads x which is preset as an array
@@ -42,7 +38,7 @@ class Perceptron:
     def prediction(self, x: numpy.array):
         #ask Dr Bloodgood should 0 be considered negative or positive 
         result = 0
-        if self.output(x) >= 0.0:
+        if self.output(x) > 0:
             result = 1
         else:
             result = -1
@@ -70,13 +66,41 @@ class Perceptron:
             self.misclassified.append(error_count)
             self.iteration_stop.append(iteration_count)
             #if error_count == 0:
-                
+      
 
 
 
 if __name__ == "__main__":
-    data = pandas.read_csv('iris.data', header = None)
+    #data = pandas.read_csv('iris.data', header = None)
+    #print(data)
+  
+    inputs = []
+    flowers = []
+
+    #p.Perceptron_Training(x, y)
+    #print(data.iloc[0,1])
     
-    #for example in data:
-    #   dataset.append(example)
-    print("testing")
+    #weights = [1, 2, 3, 4]
+    with open("iris.data", 'r') as iris_data:
+        data = iris_data.readlines()
+        #print(data)
+       
+        for example in data:
+            inputs.append(example.split(',')[:-1])
+
+
+        for i in range(150):
+            for j in range(4):
+                inputs[i][j] = float(inputs[i][j])
+
+        
+        for example in data:
+            flowers.append(example.split(',')[-1])
+
+        numpy.array(inputs)
+        numpy.array(flowers)
+
+        p = Perceptron()
+        p.Perceptron_Training(inputs, flowers)
+    
+    

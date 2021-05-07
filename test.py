@@ -53,9 +53,16 @@ class Perceptron:
                 break
             
             # Brian FIX THIS CONDITION
-            if i > 50    # if error count wont hit 0, check if the last 5 values are the same
-                 
             
+            if i > 50:    # if error count wont hit 0, check if the last 5 values are the same
+                ele = self.errorList[i][0]
+                temp_count = 0
+
+                for x in range(3):
+                    if self.errorList[i-x][0] == ele:
+                        temp_count += 1
+                if temp_count == 3:
+                    break
         return self
 #End class
 
@@ -82,7 +89,7 @@ for i in lp1.errorList.keys():
 lp2_target = numpy.where(name == 'Iris-versicolor', 1, -1) 
 lp2 = p.ptr(df_measures, lp2_target, 0)
 
-print ("\n*** LP 3 ***")
+print ("\n*** LP 2 ***")
 for i in lp2.errorList.keys():
     print("Epoch " + str(i) + ": " + str(p.errorList[i][0]) + " error(s).    Weight: " + str(p.errorList[i][1]) )
 
@@ -94,4 +101,4 @@ lp3 = p.ptr(df_measures, lp3_target, 0)
 print ("\n*** LP 3 ***")
 for i in lp3.errorList.keys():
     print("Epoch " + str(i) + ": " + str(p.errorList[i][0]) + " error(s).    Weight: " + str(p.errorList[i][1]) )
-print (lp3.errorList[99 - 5][0])
+#print (lp3.errorList[99 - 5][0])

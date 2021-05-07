@@ -58,10 +58,10 @@ class Perceptron:
                 ele = self.errorList[i][0]
                 temp_count = 0
 
-                for x in range(3):
+                for x in range(5):
                     if self.errorList[i-x][0] == ele:
                         temp_count += 1
-                if temp_count == 3:
+                if temp_count == 5:
                     break
         return self
 #End class

@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 #Start class
 class Perceptron:
-    def __init__(self, eta=0.4, epoch=200):
+    def __init__(self, eta=0.1, epoch=200):
         #epoch - int number of passes over the training dataset.
         self.eta = eta
         self.epoch = epoch
@@ -37,7 +37,7 @@ class Perceptron:
         elif weight_type == 3:
             self.w = [0, 0, 0, 0, 0]
             for i in self.w:
-                self.w[i] = round(np.random.random(), 2)    # w - initialize weights to 4 random numbers between 0 to 1
+                self.w[i] = np.random.random()   # w - initialize weights to 4 random numbers between 0 to 1 and up to 2
 
 
         for i in range(self.epoch):
@@ -64,7 +64,6 @@ class Perceptron:
                         count+= 1
                 if count == 3:
                     break
-                 
         return self
 #End class
 
@@ -75,31 +74,33 @@ name = df.iloc[0:, 4].values #getting dataframe of just names
 df_measures = df.iloc[:, 0:4].values
 #print (df_measures)
 
-p = Perceptron()
+p1 = Perceptron()
+p2 = Perceptron()
+p3 = Perceptron()
 
 ### Task 2:
 # LP 1: iris setosa (+1) versus not iris setosa (-1). Setosa is from start-50
 lp1_target = numpy.where(name == 'Iris-setosa', 1, -1) 
-lp1 = p.ptr(df_measures, lp1_target, 0)
+lp1 = p1.ptr(df_measures, lp1_target, 0)
 
 print ("*** LP 1 ***")
 for i in lp1.errorList.keys():
-    print("Epoch " + str(i) + ": " + str(p.errorList[i][0]) + " error(s).    Weight: " + str(p.errorList[i][1]) )
+    print("Epoch " + str(i) + ": " + str(lp1.errorList[i][0]) + " error(s).    Weight: " + str(lp1.errorList[i][1]) )
 
 
 # LP 2: iris versicolor (+1) versus not iris versicolor (-1). Versicolor is from 50-100
 lp2_target = numpy.where(name == 'Iris-versicolor', 1, -1) 
-lp2 = p.ptr(df_measures, lp2_target, 0)
+lp2 = p2.ptr(df_measures, lp2_target, 0)
 
 print ("\n*** LP 2 ***")
 for i in lp2.errorList.keys():
-    print("Epoch " + str(i) + ": " + str(p.errorList[i][0]) + " error(s).    Weight: " + str(p.errorList[i][1]) )
+    print("Epoch " + str(i) + ": " + str(lp2.errorList[i][0]) + " error(s).    Weight: " + str(lp2.errorList[i][1]) )
 
 
 # LP 3: iris virginica (+1) versus not iris virginica (-1). Virginica is from 100-end
 lp3_target = numpy.where(name == 'Iris-virginica', 1, -1)
-lp3 = p.ptr(df_measures, lp3_target, 0)
+lp3 = p3.ptr(df_measures, lp3_target, 0)
 
 print ("\n*** LP 3 ***")
 for i in lp3.errorList.keys():
-    print("Epoch " + str(i) + ": " + str(p.errorList[i][0]) + " error(s).    Weight: " + str(p.errorList[i][1]) )
+    print("Epoch " + str(i) + ": " + str(lp3.errorList[i][0]) + " error(s).    Weight: " + str(lp3.errorList[i][1]) )

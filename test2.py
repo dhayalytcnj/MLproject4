@@ -7,11 +7,11 @@ import matplotlib.pyplot as plt
 
 #Start class
 class Perceptron:
-    def __init__(self, eta=0.1, epoch=200):
-        #epoch - int number of passes over the training dataset.
-        self.eta = eta
-        self.epoch = epoch
-        self.errorList = {} # epoch number: [errors in epoch, array of weights at that epoch]
+    def __init__(self, eta=0.1, epoch=300):
+        self.eta = eta          # learning rate set to 0.1
+        self.epoch = epoch      # max number of epochs to iterate to is set to 300
+        self.errorList = {}     # epoch number: [errors in epoch, array of weights at that epoch]
+        self.w = []
 
 
     def dotProductOutput(self, training_vector): # Return o value (1 or -1) after dot prodcut
@@ -37,7 +37,7 @@ class Perceptron:
         elif weight_type == 3:
             self.w = [0, 0, 0, 0, 0]
             for i in self.w:
-                self.w[i] = np.random.random()   # w - initialize weights to 4 random numbers between 0 to 1 and up to 2
+                self.w[i] = random.random()   # w - initialize weights to 4 random numbers between 0 to 1 
 
 
         for i in range(self.epoch):
@@ -68,16 +68,22 @@ class Perceptron:
 #End class
 
 
-#main
-df = pandas.read_csv('iris.data', header=None)
-name = df.iloc[0:, 4].values #getting dataframe of just names
-df_measures = df.iloc[:, 0:4].values
-#print (df_measures)
 
+
+#--------- MAIN ---------
+
+df = pandas.read_csv('iris.data', header=None)
+name = df.iloc[0:, 4].values            # getting dataframe of just names
+df_measures = df.iloc[:, 0:4].values    # represent the measurements
+
+#----------- TASK 2:
+#initial weights set to 0
+# LP 1: iris setosa (+1) versus not iris setosa (-1).
 p1 = Perceptron()
 p2 = Perceptron()
 p3 = Perceptron()
 
+<<<<<<< HEAD:test2.py
 
 
 ### Task 2:
@@ -112,6 +118,45 @@ for i in lp2.errorList.keys():
     print("Epoch " + str(i) + ": " + str(lp2.errorList[i][0]) + " error(s).    Weight: " + str(lp2.errorList[i][1]) )
     x_points_2.append(i)
     y_points_2.append(lp2.errorList[i][0])
+=======
+lp1_target = numpy.where(name == 'Iris-setosa', 1, -1) 
+lp1 = p1.ptr(df_measures, lp1_target, 0)
+
+print ("*** Task 2: LP 1 ***")
+f = open("t2_lp1.txt", "w")
+for i in lp1.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp1.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp1.errorList[i][1][0]) + "    iris weights: " + str(lp1.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 2 LP 1 epoch data saved in t2_lp1.txt\n")
+
+'''
+elist = lp1.errorList.keys()
+print (elist)
+#print(elist)
+x, y = zip(*elist)
+#print (y[0])
+
+plt.plot(x, y.values)
+plt.xlabel('Epochs')
+plt.ylabel('Number of errors')
+plt.show()
+
+# plt.savefig('./perceptron_1.png', dpi=300)
+'''
+
+# LP 2: iris versicolor (+1) versus not iris versicolor (-1).
+lp2_target = numpy.where(name == 'Iris-versicolor', 1, -1) 
+lp2 = p2.ptr(df_measures, lp2_target, 0)
+
+print ("*** Task 2: LP 2 ***")
+f = open("t2_lp2.txt", "w")
+for i in lp2.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp2.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp2.errorList[i][1][0]) + "    iris weights: " + str(lp2.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 2 LP 2 epoch data saved in t2_lp2.txt\n")
+>>>>>>> a0a22522ff3d91c8a76be6bb746bc39efb6574e7:test.py
 
 #print(x_points_2)
 #print(y_points_2)
@@ -121,10 +166,11 @@ plt.savefig('plots2.png')
 plt.clf()
  
 
-# LP 3: iris virginica (+1) versus not iris virginica (-1). Virginica is from 100-end
+# LP 3: iris virginica (+1) versus not iris virginica (-1).
 lp3_target = numpy.where(name == 'Iris-virginica', 1, -1)
 lp3 = p3.ptr(df_measures, lp3_target, 0)
 
+<<<<<<< HEAD:test2.py
 x_points_3 = []
 y_points_3 = []
 
@@ -141,3 +187,242 @@ plt.plot(x_points_3, y_points_3, 'b-')
 plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
 plt.savefig('plots3.png')
 plt.clf()
+=======
+print ("*** Task 2: LP 3 ***")
+f = open("t2_lp3.txt", "w")
+for i in lp3.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp3.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp3.errorList[i][1][0]) + "    iris weights: " + str(lp3.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 2 LP 3 epoch data saved in t2_lp3.txt\n")
+
+
+'''
+print("--------------------")
+#----------- TASK 3:
+#----- Task 3.1: all initial weights set to 1
+
+p1 = Perceptron()
+p2 = Perceptron()
+p3 = Perceptron()
+# LP1:
+lp1 = p1.ptr(df_measures, lp1_target, 1)
+
+print ("\n*** Task 3.1: LP 1 ***")
+f = open("t3_1_lp1.txt", "w")
+for i in lp1.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp1.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp1.errorList[i][1][0]) + "    iris weights: " + str(lp1.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 3.1 LP 1 epoch data saved in t3_1_lp1.txt")
+
+
+# LP2:
+lp2 = p2.ptr(df_measures, lp2_target, 1)
+
+print ("\n*** Task 3.1: LP 2 ***")
+f = open("t3_1_lp2.txt", "w")
+for i in lp2.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp2.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp2.errorList[i][1][0]) + "    iris weights: " + str(lp2.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 3.1 LP 2 epoch data saved in t3_1_lp2.txt")
+
+
+# LP3:
+lp3 = p3.ptr(df_measures, lp3_target, 1)
+
+print ("\n*** Task 3.1: LP 3 ***")
+f = open("t3_1_lp3.txt", "w")
+for i in lp3.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp3.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp3.errorList[i][1][0]) + "    iris weights: " + str(lp3.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 3.1 LP 3 epoch data saved in t3_1_lp3.txt\n")
+
+
+print("--------------------")
+#----- Task 3.2: initial weights set to four different #s between 0 and 1
+p1 = Perceptron()
+p2 = Perceptron()
+p3 = Perceptron()
+# LP1:
+lp1 = p1.ptr(df_measures, lp1_target, 2)
+
+print ("\n*** Task 3.2: LP 1 ***")
+f = open("t3_2_lp1.txt", "w")
+for i in lp1.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp1.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp1.errorList[i][1][0]) + "    iris weights: " + str(lp1.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 3.2 LP 1 epoch data saved in t3_2_lp1.txt")
+
+
+# LP2:
+lp2 = p2.ptr(df_measures, lp2_target, 2)
+
+print ("\n*** Task 3.2: LP 2 ***")
+f = open("t3_2_lp2.txt", "w")
+for i in lp2.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp2.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp2.errorList[i][1][0]) + "    iris weights: " + str(lp2.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 3.2 LP 2 epoch data saved in t3_2_lp2.txt")
+
+
+# LP3:
+lp3 = p3.ptr(df_measures, lp3_target, 2)
+
+print ("\n*** Task 3.2: LP 3 ***")
+f = open("t3_2_lp3.txt", "w")
+for i in lp3.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp3.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp3.errorList[i][1][0]) + "    iris weights: " + str(lp3.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 3.2 LP 3 epoch data saved in t3_2_lp3.txt\n")
+
+
+print("--------------------")
+#----- Task 3.3: initial weights set to four different random values
+p1 = Perceptron()
+p2 = Perceptron()
+p3 = Perceptron()
+# LP1:
+lp1 = p1.ptr(df_measures, lp1_target, 3)
+
+print ("\n*** Task 3.3: LP 1 ***")
+f = open("t3_3_lp1.txt", "w")
+for i in lp1.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp1.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp1.errorList[i][1][0]) + "    iris weights: " + str(lp1.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 3.3 LP 1 epoch data saved in t3_3_lp1.txt")
+
+
+# LP2:
+lp2 = p2.ptr(df_measures, lp2_target, 3)
+
+print ("\n*** Task 3.3: LP 2 ***")
+f = open("t3_3_lp2.txt", "w")
+for i in lp2.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp2.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp2.errorList[i][1][0]) + "    iris weights: " + str(lp2.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 3.3 LP 2 epoch data saved in t3_3_lp2.txt")
+
+
+# LP3:
+lp3 = p3.ptr(df_measures, lp3_target, 3)
+
+print ("\n*** Task 3.3: LP 3 ***")
+f = open("t3_3_lp3.txt", "w")
+for i in lp3.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp3.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp3.errorList[i][1][0]) + "    iris weights: " + str(lp3.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 3.3 LP 3 epoch data saved in t3_3_lp3.txt\n")
+
+
+
+print("--------------------")
+#----------- TASK 4:
+#----- Task 4.1: T2 but with iris.data randomly shuffled
+df4_1 = df.sample(frac=1)                  # produce a randomly shuffled sample of df. Sample consists of the whole dataframe due to frac=1 
+name = df4_1.iloc[0:, 4].values            # getting dataframe of just names
+df_measures = df4_1.iloc[:, 0:4].values    # represent the measurements
+
+#initial weights set to 0
+# LP 1: iris setosa (+1) versus not iris setosa (-1).
+p1 = Perceptron()
+p2 = Perceptron()
+p3 = Perceptron()
+
+lp1_target = numpy.where(name == 'Iris-setosa', 1, -1) 
+lp1 = p1.ptr(df_measures, lp1_target, 0)
+
+print ("*** Task 4.1: LP 1 ***")
+f = open("t4_1_lp1.txt", "w")
+for i in lp1.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp1.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp1.errorList[i][1][0]) + "    iris weights: " + str(lp1.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 4.1 LP 1 epoch data saved in t4_1_lp1.txt\n")
+
+
+# LP 2: iris versicolor (+1) versus not iris versicolor (-1).
+lp2_target = numpy.where(name == 'Iris-versicolor', 1, -1) 
+lp2 = p2.ptr(df_measures, lp2_target, 0)
+
+print ("*** Task 4.1: LP 2 ***")
+f = open("t4_1_lp2.txt", "w")
+for i in lp2.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp2.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp2.errorList[i][1][0]) + "    iris weights: " + str(lp2.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 4.1 LP 2 epoch data saved in t4_1_lp2.txt\n")
+
+
+# LP 3: iris virginica (+1) versus not iris virginica (-1).
+lp3_target = numpy.where(name == 'Iris-virginica', 1, -1)
+lp3 = p3.ptr(df_measures, lp3_target, 0)
+
+print ("*** Task 4.1: LP 3 ***")
+f = open("t4_1_lp3.txt", "w")
+for i in lp3.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp3.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp3.errorList[i][1][0]) + "    iris weights: " + str(lp3.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 4.1 LP 3 epoch data saved in t4_1_lp3.txt\n")
+
+print("--------------------")
+
+#----- Task 4.2: T2 but with iris.data different randomly shuffled
+df4_2 = df4_1.sample(frac=1)               # produce a randomly shuffled sample of df4_1. Sample consists of the whole dataframe due to frac=1 
+name = df4_2.iloc[0:, 4].values            # getting dataframe of just names
+df_measures = df4_2.iloc[:, 0:4].values    # represent the measurements
+
+#initial weights set to 0
+# LP 1: iris setosa (+1) versus not iris setosa (-1).
+p1 = Perceptron()
+p2 = Perceptron()
+p3 = Perceptron()
+
+lp1_target = numpy.where(name == 'Iris-setosa', 1, -1) 
+lp1 = p1.ptr(df_measures, lp1_target, 0)
+
+print ("*** Task 4.2: LP 1 ***")
+f = open("t4_2_lp1.txt", "w")
+for i in lp1.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp1.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp1.errorList[i][1][0]) + "    iris weights: " + str(lp1.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 4.2 LP 1 epoch data saved in t4_2_lp1.txt\n")
+
+
+# LP 2: iris versicolor (+1) versus not iris versicolor (-1).
+lp2_target = numpy.where(name == 'Iris-versicolor', 1, -1) 
+lp2 = p2.ptr(df_measures, lp2_target, 0)
+
+print ("*** Task 4.2: LP 2 ***")
+f = open("t4_2_lp2.txt", "w")
+for i in lp2.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp2.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp2.errorList[i][1][0]) + "    iris weights: " + str(lp2.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 4.2 LP 2 epoch data saved in t4_2_lp2.txt\n")
+
+
+# LP 3: iris virginica (+1) versus not iris virginica (-1).
+lp3_target = numpy.where(name == 'Iris-virginica', 1, -1)
+lp3 = p3.ptr(df_measures, lp3_target, 0)
+
+print ("*** Task 4.2: LP 3 ***")
+f = open("t4_2_lp3.txt", "w")
+for i in lp3.errorList.keys():
+    line = "Epoch " + str(i) + ":    " + str(lp3.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp3.errorList[i][1][0]) + "    iris weights: " + str(lp3.errorList[i][1][1:])
+    f.write(line + "\n")
+f.close()
+print ("Task 4.2 LP 3 epoch data saved in t4_2_lp3.txt\n")
+
+'''
+>>>>>>> a0a22522ff3d91c8a76be6bb746bc39efb6574e7:test.py

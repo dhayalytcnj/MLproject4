@@ -86,39 +86,47 @@ p3 = Perceptron()
 lp1_target = numpy.where(name == 'Iris-setosa', 1, -1) 
 lp1 = p1.ptr(df_measures, lp1_target, 0)
 
+x_points = []
+y_points = []
+
 print ("*** Task 2: LP 1 ***")
 f = open("t2_lp1.txt", "w")
 for i in lp1.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp1.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp1.errorList[i][1][0]) + "    iris weights: " + str(lp1.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp1.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t2_lp1_plot.png')
+plt.clf()
+
 print ("Task 2 LP 1 epoch data saved in t2_lp1.txt\n")
-
-
-eli
-print (elist)
-#print(elist)
-x, y = zip(*elist)
-#print (y[0])
-
-plt.plot()
-plt.xlabel('Epochs')
-plt.ylabel('Number of errors')
-plt.show()
-
-# plt.savefig('./perceptron_1.png', dpi=300)
 
 
 # LP 2: iris versicolor (+1) versus not iris versicolor (-1).
 lp2_target = numpy.where(name == 'Iris-versicolor', 1, -1) 
 lp2 = p2.ptr(df_measures, lp2_target, 0)
 
+x_points = []
+y_points = []
+
 print ("*** Task 2: LP 2 ***")
 f = open("t2_lp2.txt", "w")
 for i in lp2.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp2.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp2.errorList[i][1][0]) + "    iris weights: " + str(lp2.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp2.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t2_lp2_plot.png')
+plt.clf()
+
 print ("Task 2 LP 2 epoch data saved in t2_lp2.txt\n")
 
 
@@ -126,16 +134,27 @@ print ("Task 2 LP 2 epoch data saved in t2_lp2.txt\n")
 lp3_target = numpy.where(name == 'Iris-virginica', 1, -1)
 lp3 = p3.ptr(df_measures, lp3_target, 0)
 
+x_points = []
+y_points = []
+
 print ("*** Task 2: LP 3 ***")
 f = open("t2_lp3.txt", "w")
 for i in lp3.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp3.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp3.errorList[i][1][0]) + "    iris weights: " + str(lp3.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp3.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t2_lp3_plot.png')
+plt.clf()
+
 print ("Task 2 LP 3 epoch data saved in t2_lp3.txt\n")
 
 
-'''
+
 print("--------------------")
 #----------- TASK 3:
 #----- Task 3.1: all initial weights set to 1
@@ -146,36 +165,69 @@ p3 = Perceptron()
 # LP1:
 lp1 = p1.ptr(df_measures, lp1_target, 1)
 
+x_points = []
+y_points = []
+
 print ("\n*** Task 3.1: LP 1 ***")
 f = open("t3_1_lp1.txt", "w")
 for i in lp1.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp1.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp1.errorList[i][1][0]) + "    iris weights: " + str(lp1.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp1.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t3_1_lp1_plot.png')
+plt.clf()
+
 print ("Task 3.1 LP 1 epoch data saved in t3_1_lp1.txt")
 
 
 # LP2:
 lp2 = p2.ptr(df_measures, lp2_target, 1)
 
+x_points = []
+y_points = []
+
 print ("\n*** Task 3.1: LP 2 ***")
 f = open("t3_1_lp2.txt", "w")
 for i in lp2.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp2.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp2.errorList[i][1][0]) + "    iris weights: " + str(lp2.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp2.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t3_1_lp2_plot.png')
+plt.clf()
+
 print ("Task 3.1 LP 2 epoch data saved in t3_1_lp2.txt")
 
 
 # LP3:
 lp3 = p3.ptr(df_measures, lp3_target, 1)
 
+x_points = []
+y_points = []
+
 print ("\n*** Task 3.1: LP 3 ***")
 f = open("t3_1_lp3.txt", "w")
 for i in lp3.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp3.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp3.errorList[i][1][0]) + "    iris weights: " + str(lp3.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp3.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t3_1_lp3_plot.png')
+plt.clf()
+
 print ("Task 3.1 LP 3 epoch data saved in t3_1_lp3.txt\n")
 
 
@@ -187,36 +239,69 @@ p3 = Perceptron()
 # LP1:
 lp1 = p1.ptr(df_measures, lp1_target, 2)
 
+x_points = []
+y_points = []
+
 print ("\n*** Task 3.2: LP 1 ***")
 f = open("t3_2_lp1.txt", "w")
 for i in lp1.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp1.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp1.errorList[i][1][0]) + "    iris weights: " + str(lp1.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp1.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t3_2_lp1_plot.png')
+plt.clf()
+
 print ("Task 3.2 LP 1 epoch data saved in t3_2_lp1.txt")
 
 
 # LP2:
 lp2 = p2.ptr(df_measures, lp2_target, 2)
 
+x_points = []
+y_points = []
+
 print ("\n*** Task 3.2: LP 2 ***")
 f = open("t3_2_lp2.txt", "w")
 for i in lp2.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp2.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp2.errorList[i][1][0]) + "    iris weights: " + str(lp2.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp2.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t3_2_lp2_plot.png')
+plt.clf()
+
 print ("Task 3.2 LP 2 epoch data saved in t3_2_lp2.txt")
 
 
 # LP3:
 lp3 = p3.ptr(df_measures, lp3_target, 2)
 
+x_points = []
+y_points = []
+
 print ("\n*** Task 3.2: LP 3 ***")
 f = open("t3_2_lp3.txt", "w")
 for i in lp3.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp3.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp3.errorList[i][1][0]) + "    iris weights: " + str(lp3.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp3.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t3_2_lp3_plot.png')
+plt.clf()
+
 print ("Task 3.2 LP 3 epoch data saved in t3_2_lp3.txt\n")
 
 
@@ -228,36 +313,69 @@ p3 = Perceptron()
 # LP1:
 lp1 = p1.ptr(df_measures, lp1_target, 3)
 
+x_points = []
+y_points = []
+
 print ("\n*** Task 3.3: LP 1 ***")
 f = open("t3_3_lp1.txt", "w")
 for i in lp1.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp1.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp1.errorList[i][1][0]) + "    iris weights: " + str(lp1.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp1.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t3_3_lp1_plot.png')
+plt.clf()
+
 print ("Task 3.3 LP 1 epoch data saved in t3_3_lp1.txt")
 
 
 # LP2:
 lp2 = p2.ptr(df_measures, lp2_target, 3)
 
+x_points = []
+y_points = []
+
 print ("\n*** Task 3.3: LP 2 ***")
 f = open("t3_3_lp2.txt", "w")
 for i in lp2.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp2.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp2.errorList[i][1][0]) + "    iris weights: " + str(lp2.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp2.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t3_3_lp2_plot.png')
+plt.clf()
+
 print ("Task 3.3 LP 2 epoch data saved in t3_3_lp2.txt")
 
 
 # LP3:
 lp3 = p3.ptr(df_measures, lp3_target, 3)
 
+x_points = []
+y_points = []
+
 print ("\n*** Task 3.3: LP 3 ***")
 f = open("t3_3_lp3.txt", "w")
 for i in lp3.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp3.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp3.errorList[i][1][0]) + "    iris weights: " + str(lp3.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp3.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t3_3_lp3_plot.png')
+plt.clf()
+
 print ("Task 3.3 LP 3 epoch data saved in t3_3_lp3.txt\n")
 
 
@@ -278,12 +396,23 @@ p3 = Perceptron()
 lp1_target = numpy.where(name == 'Iris-setosa', 1, -1) 
 lp1 = p1.ptr(df_measures, lp1_target, 0)
 
+x_points = []
+y_points = []
+
 print ("*** Task 4.1: LP 1 ***")
 f = open("t4_1_lp1.txt", "w")
 for i in lp1.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp1.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp1.errorList[i][1][0]) + "    iris weights: " + str(lp1.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp1.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t4_1_lp1_plot.png')
+plt.clf()
+
 print ("Task 4.1 LP 1 epoch data saved in t4_1_lp1.txt\n")
 
 
@@ -291,12 +420,23 @@ print ("Task 4.1 LP 1 epoch data saved in t4_1_lp1.txt\n")
 lp2_target = numpy.where(name == 'Iris-versicolor', 1, -1) 
 lp2 = p2.ptr(df_measures, lp2_target, 0)
 
+x_points = []
+y_points = []
+
 print ("*** Task 4.1: LP 2 ***")
 f = open("t4_1_lp2.txt", "w")
 for i in lp2.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp2.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp2.errorList[i][1][0]) + "    iris weights: " + str(lp2.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp2.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t4_1_lp2_plot.png')
+plt.clf()
+
 print ("Task 4.1 LP 2 epoch data saved in t4_1_lp2.txt\n")
 
 
@@ -304,12 +444,23 @@ print ("Task 4.1 LP 2 epoch data saved in t4_1_lp2.txt\n")
 lp3_target = numpy.where(name == 'Iris-virginica', 1, -1)
 lp3 = p3.ptr(df_measures, lp3_target, 0)
 
+x_points = []
+y_points = []
+
 print ("*** Task 4.1: LP 3 ***")
 f = open("t4_1_lp3.txt", "w")
 for i in lp3.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp3.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp3.errorList[i][1][0]) + "    iris weights: " + str(lp3.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp3.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t4_1_lp3_plot.png')
+plt.clf()
+
 print ("Task 4.1 LP 3 epoch data saved in t4_1_lp3.txt\n")
 
 print("--------------------")
@@ -328,12 +479,23 @@ p3 = Perceptron()
 lp1_target = numpy.where(name == 'Iris-setosa', 1, -1) 
 lp1 = p1.ptr(df_measures, lp1_target, 0)
 
+x_points = []
+y_points = []
+
 print ("*** Task 4.2: LP 1 ***")
 f = open("t4_2_lp1.txt", "w")
 for i in lp1.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp1.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp1.errorList[i][1][0]) + "    iris weights: " + str(lp1.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp1.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t4_2_lp1_plot.png')
+plt.clf()
+
 print ("Task 4.2 LP 1 epoch data saved in t4_2_lp1.txt\n")
 
 
@@ -341,12 +503,23 @@ print ("Task 4.2 LP 1 epoch data saved in t4_2_lp1.txt\n")
 lp2_target = numpy.where(name == 'Iris-versicolor', 1, -1) 
 lp2 = p2.ptr(df_measures, lp2_target, 0)
 
+x_points = []
+y_points = []
+
 print ("*** Task 4.2: LP 2 ***")
 f = open("t4_2_lp2.txt", "w")
 for i in lp2.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp2.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp2.errorList[i][1][0]) + "    iris weights: " + str(lp2.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp2.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t4_2_lp2_plot.png')
+plt.clf()
+
 print ("Task 4.2 LP 2 epoch data saved in t4_2_lp2.txt\n")
 
 
@@ -354,12 +527,23 @@ print ("Task 4.2 LP 2 epoch data saved in t4_2_lp2.txt\n")
 lp3_target = numpy.where(name == 'Iris-virginica', 1, -1)
 lp3 = p3.ptr(df_measures, lp3_target, 0)
 
+x_points = []
+y_points = []
+
 print ("*** Task 4.2: LP 3 ***")
 f = open("t4_2_lp3.txt", "w")
 for i in lp3.errorList.keys():
     line = "Epoch " + str(i) + ":    " + str(lp3.errorList[i][0]) + " error(s)    x_0 weight: " + str(lp3.errorList[i][1][0]) + "    iris weights: " + str(lp3.errorList[i][1][1:])
     f.write(line + "\n")
+    x_points.append(i)
+    y_points.append(lp3.errorList[i][0])
 f.close()
+
+plt.plot(x_points, y_points, 'b-')
+plt.gca().set(title='Number of Errors Per Epoch', xlabel = "Number of Epochs", ylabel='Errors')
+plt.savefig('t4_2_lp3_plot.png')
+plt.clf()
+
 print ("Task 4.2 LP 3 epoch data saved in t4_2_lp3.txt\n")
 
-'''
+
